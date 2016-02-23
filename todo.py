@@ -39,16 +39,21 @@ def next():
 def main(argv):
     f = open('workfile', 'a')
     method_name = sys.argv[1]
-    possibles = globals().copy()
-    possibles.update(locals())
-    method = possibles.get(method_name)
-    if not method:
-         raise NotImplementedError("Method %s not implemented" % method_name)
-    if method_name == 'add':
-        method(sys.argv[2])
+    if sys.argv[2:]:
+        if method_name == 'add':
+            params = sys.argv[2]
+            add(params)
+        else:
+            print("Function doesn't take any parameters , please try again")
     else:
-        method()
-
+        if method_name == 'done':
+            done()
+        elif method_name == 'next':
+            next()
+        elif method_name == 'ls':
+            ls()
+        else:
+            print("No function found")
 if __name__ == "__main__":
    main(sys.argv[1:])
 
